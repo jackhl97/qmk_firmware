@@ -1,4 +1,5 @@
 #include "kb.h"
+#include "analog.h"
 
 enum planck_layers {
   _BASE = 0,
@@ -50,8 +51,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 void matrix_init_user(void) {
 }
 
-void matrix_scan_user(void) {
-}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	return true;
@@ -113,36 +112,15 @@ void encoder_update_user(uint8_t index, bool clockwise) {
     }
 }
 
-void led_set_user(uint8_t usb_led) {
+uint8_t divisor = 0;
 
-	if (usb_led & (1 << USB_LED_NUM_LOCK)) {
-		
-	} else {
-		
-	}
+void slider(void) {
+    if (divisor++) { // only run the slider function 1/256 times it's called
+        return;
+    }
+    rgblight_sethsv(rgblight_get_hue(), rgblight_get_sat(), analogReadPin(SLIDER_PIN)>>2);
+}
 
-	if (usb_led & (1 << USB_LED_CAPS_LOCK)) {
-		
-	} else {
-		
-	}
-
-	if (usb_led & (1 << USB_LED_SCROLL_LOCK)) {
-		
-	} else {
-		
-	}
-
-	if (usb_led & (1 << USB_LED_COMPOSE)) {
-		
-	} else {
-		
-	}
-
-	if (usb_led & (1 << USB_LED_KANA)) {
-		
-	} else {
-		
-	}
-
+void matrix_scan_user(void) {
+    slider();
 }

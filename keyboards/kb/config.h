@@ -26,6 +26,8 @@
 #define ENCODERS_PAD_A { B6 }
 #define ENCODERS_PAD_B { B2 } 
 
+#define SLIDER_PIN F7
+#define ADC_RESOLUTION ADC_CFGR1_RES_8BIT
 /* number of backlight levels */
 
 #ifdef BACKLIGHT_PIN
@@ -58,6 +60,7 @@
 #define RGBLIGHT_HUE_STEP 8
 #define RGBLIGHT_SAT_STEP 8
 #define RGBLIGHT_VAL_STEP 8
+#define RGBLIGHT_SLEEP
 #endif
 
 #endif
